@@ -12,3 +12,19 @@ $gamesMario = Jeu::where('name', 'LIKE', '%Mario%')->get();
 foreach ($gamesMario as $game) {
     print_r($game->name . "\n");
 }
+
+
+
+
+
+
+
+
+
+print_r("Q5 : \n\n");
+$page = readline("Quelle page souhaitez-vous ?");
+while($page <= 0) $page = readline("ERREUR\nMettez une page positive.");
+$allGames = Jeu::where('id', '>', 500*($page-1))->limit(500);
+foreach ($allGames as $game) {
+    print_r("\t" . $game->id . " : " . $game->name . " " . $game->deck . "\n");
+}
