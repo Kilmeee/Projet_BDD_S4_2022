@@ -1,0 +1,13 @@
+{
+  "name": "iutnc-pgka/projet_bdd_s4_2022",
+  "description": "Projet BDD SQL 2022",
+  "require": {
+    "illuminate/database": "^v8.83.2",
+    "php": "^8.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "gamepedia\\": "src/"
+    }
+  }
+}
