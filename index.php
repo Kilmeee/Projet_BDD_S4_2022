@@ -1,7 +1,7 @@
 <?php
 
 use gamepedia\db\Eloquent;
-use gamepedia\models\{Plateforme, Jeu};
+use gamepedia\models\{Jeu, Compagnie};
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
@@ -15,11 +15,18 @@ foreach ($gamesMario as $game) {
 
 
 
-//Q3
-print_r("Q3 : \n");
-$installBasePlat = Plateform::where('install_base', '>=', '10000000')->get();
-foreach ($installBasePlat as $plat) {
-    print_r($plat->name . "\n");
+
+
+
+
+
+
+
+
+print_r("Q2 : \n");
+$japanCompany = Compagnie::where('country','LIKE','Japon')->get();
+foreach ($japanCompany as $jc) {
+    print_r($jc->name . "\n");
 }
 
 
