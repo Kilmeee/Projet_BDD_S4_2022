@@ -35,7 +35,7 @@ class Eloquent
             $capsule->getConnection()->getPdo();
         } catch (Exception $e) {
             print_r($e->getMessage());
-            print_r("Could not connect to the database");
+            print_r("\nCould not connect to the database");
             exit();
         }
     }
