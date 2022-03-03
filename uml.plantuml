@@ -1,0 +1,87 @@
+@startuml "Modèle UML"
+
+class Theme {
+    - nom : String
+}
+
+class Genre {
+    - descCourte : String
+    - descLongue : String
+}
+
+class Jeu {
+    - nom : String
+    - descCourte : String
+    - descLongue : String
+    - dateSortieInitiale : date
+    - dateSortieAttendue : date
+}
+
+class Plateforme {
+    - nom : String
+    - alias : String
+    - descCourte : String
+    - descLongue : String
+    - dateSortie : date
+    - tarif : int
+    - decompteBase
+}
+
+class Compagnie {
+    - nom : String
+    - alias : String
+    - abreviation : String
+    - descCourte : String
+    - descLongue : String
+    - adresse : String
+    - dateCreation : date
+    - numTel : int
+    - urlSite : String
+}
+
+class Classement {
+    - publicDestine : String
+}
+
+class OrganismeClassification {
+    - nom : String
+    - desCourte : String
+    - descLongue : String 
+}
+
+class Personnage {
+    - nom : String
+    - alias : String 
+    - nomReel : String
+    - nomDeFamille : String
+    - dateNaissance : date
+    - genre : Char
+    - desCourte : String
+    - descLongue : String
+}
+
+Compagnie "1..*" --> "*" Jeu : "developpe"
+
+Compagnie "1..*" --> "*" Jeu : "publie"
+
+Jeu "*" --> "1..*" Theme : "themes"
+
+Jeu "*" ---> "1..*" Genre : "genres"
+
+Jeu "*" --> "1..*" Plateforme : "fonctionne"
+
+OrganismeClassification "1" --> "*" Classement : "delivre"
+
+Classement "1..*" --> "*" Jeu : "classifie"
+
+Personnage "*" --> "1..*" Jeu : "apparaitJeu"
+
+Personnage "*" --> "1" Jeu : "apparaitJeuPremiereFois"
+
+Personnage "*" -left-> "1..*" Personnage : "amis"
+
+Personnage "*" -up-> "1..*" Personnage : "ennemis"
+
+Plateforme "*" --> "1" Compagnie : "fabrique"
+
+@enduml
