@@ -45,7 +45,7 @@ class Classement {
 
 class OrganismeClassification {
     - nom : String
-    - desCourte : String
+    - descCourte : String
     - descLongue : String 
 }
 
@@ -56,7 +56,7 @@ class Personnage {
     - nomDeFamille : String
     - dateNaissance : date
     - genre : Char
-    - desCourte : String
+    - descCourte : String
     - descLongue : String
 }
 
