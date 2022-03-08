@@ -18,7 +18,7 @@ Modèle Annonce : **Relation hasMany**
 namespace name\models;
 
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\Relations\HasMany
+use \Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Annonce extends Model
 {
@@ -36,7 +36,7 @@ class Annonce extends Model
     */
     public function photos()
     {
-        return $this->hasMany('name\models\photo', 'id_annonce');
+        return $this->hasMany('name\models\Photo', 'id_annonce');
     }
 }
 ```
@@ -49,7 +49,7 @@ Modèle Photo : **Relation belongsTo**
 namespace name\models;
 
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\Relations\BelongsTo
+use \Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Photo extends Model
 {
@@ -67,7 +67,7 @@ class Photo extends Model
     */
     public function annonce()
     {
-        return $this->belongsTo('name\models\annonce', 'id_annonce');
+        return $this->belongsTo('name\models\Annonce', 'id_annonce');
     }
 }
 ```
@@ -89,7 +89,13 @@ use name\models\{Annonce, Photo, Categorie};
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 Eloquent::start(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'conf.ini');
-//TODO
+
+$annonces = [];
+foreach (Annonce::all() as $annonce) {
+    if($annonce->photos()->count() > 3) {
+        $annoncesR[] = $annonce;
+    }
+}
 ```
 
 ### 3.4 :
