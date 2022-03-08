@@ -105,6 +105,25 @@ foreach (Annonce::all() as $annonce) {
 ## Question 4 :
 
 ---
+```php
+
+$photo = new \models\Photo();
+$photo->file = "";
+$photo->date = "";
+$photo->taille_octet = "";
+$annonce = Annonce::where('id','=','22')->get();
+$annonce->photos()->save($photo);
+
+
+
+
+```
 
 ## Question 5 :
-
+```php
+$annonce = Annonce::where('id','=','22')->get();
+$categ42 = Categorie::where('id','=','42')->get();
+$categ73 = Categorie::where('id','=','73')->get();
+$categ42->annonces()->save($annonce);
+$categ73->annonces()->save($annonce);
+```
