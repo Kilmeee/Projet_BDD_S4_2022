@@ -6,6 +6,8 @@
 
 ## Question 1 :
 
+<img width="321" alt="schemaUML" src="https://user-images.githubusercontent.com/49103056/157445188-8c7b91e4-bb41-4578-b66c-468ba663aae8.png">
+
 ---
 
 ## Question 2 :
@@ -112,6 +114,19 @@ foreach (Annonce::all() as $annonce) {
 ```
 
 ### 3.4 :
+
+```php
+<?php
+
+use name\models\Annonce;
+
+$annonces = [];
+foreach(Annonce::all() as $annonce){
+    if($annonce->photos->where('taille_octet','>','100000')->count() > 0){
+        $annonces[] = $annonce;
+    }
+}
+```
 
 ---
 
