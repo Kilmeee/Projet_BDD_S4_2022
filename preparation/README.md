@@ -8,7 +8,13 @@
 
 ### Question 1 :
 
-//TODO
+```php
+<?php
+$start=hrtime(true);
+$end=hrtime(true);
+$time=$end-$start;
+echo $time/1e+6;
+```
 
 ### Question 2 :
 
