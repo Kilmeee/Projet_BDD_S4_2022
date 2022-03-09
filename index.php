@@ -14,16 +14,15 @@ Eloquent::start(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'c
 
 
 //Q3
-$jeuxSony = Jeu::where('compagnie_id', '=', Compagnie::where('nom', 'like', '%Sony%')->first()->id)->get();
-foreach($jeuxSony as $jeu) {
-    echo $jeu->nom . '<br>';
+$jeuxSony = Compagnie::where('name','like', '%Sony%')->first()->jeuxDeveloppes()->get();
+foreach($jeuxSony as $jeu){
+    echo $jeu->name . '<br>';
 }
 
 //Q4
 $ratingsMario = Rating::has('jeux', function($j){
     $j->where('nom', 'like', '%Mario%');
 })->get();
-
 foreach($ratingsMario as $rating) {
-    echo $rating->nom . '<br>';
+    echo $rating->ratingBoard->name. " ".$rating->nom . '<br>';
 }
