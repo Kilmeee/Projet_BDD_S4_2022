@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static where(string $string, string $string1, string $string2)
  */
-class Jeu extends Model
+
+class Personnage extends Model
 {
 
-    protected $table = 'game';
+    protected $table = 'character';
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
 
-    public function characters() {
-        return $this->hasMany(Personnage::class);
-    }
+   public function characterGames() {
+       return $this->belongsTo(Jeu::class);
+   }
 
 }
