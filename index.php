@@ -7,68 +7,30 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 Eloquent::start(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'conf.ini');
 
 // Q1
-print("Question 1 : \n\n");
+print_r("Q1 : \n");
 $charactersGame = Jeu::find('12342')->characters()->get();
-foreach ($charactersGame as $character){
-    print($character->name . ', ' . $character->deck . "\n");
+foreach ($charactersGame as $character) {
+    print_r($character->name . ', ' . $character->deck . "\n");
 }
-print("\n");
-
+print_r("\n");
 
 // Q2
-print("Question 2 : \n\n");
-$marioGames = Jeu::where('name','like','Mario%')->get();
-foreach ($marioGames as $mc){
-    foreach ($mc->characters as $character){
-        print($character->name . "\n");
+print_r("Q2 : \n");
+$marioGames = Jeu::where('name', 'like', 'Mario%')->get();
+foreach ($marioGames as $mc) {
+    foreach ($mc->characters as $character) {
+        print_r($character->name . "\n");
     }
 }
-print("\n");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print_r("\n");
 
 //Q3
 print_r("Q3 :\n");
 $compagnies = Compagnie::where('name', 'like', '%Sony%')->has('jeuxDeveloppes')->get();
 foreach ($compagnies as $compagny) {
-    echo $compagny->name . "\n";
+    print_r($compagny->name . "\n");
     foreach ($compagny->jeuxDeveloppes as $jeu) {
-        print_r("\t".$jeu->name . "\n");
+        print_r("\t" . $jeu->name . "\n");
     }
 }
 print_r("\n");
@@ -79,25 +41,25 @@ $ratingsMario = Rating::whereHas('jeux', function ($j) {
     $j->where('name', 'like', '%Mario%');
 })->get();
 foreach ($ratingsMario as $rating) {
-    echo $rating->ratingBoard->deck . " -> " . $rating->name . "\n";
+    print_r($rating->ratingBoard->deck . " -> " . $rating->name . "\n");
 }
 print_r("\n");
 
 // Q5
 print_r("Q5 :\n");
 $jeux = Jeu::where('name', 'like', 'Mario%')->has('characters', '>', '3')->get();
-foreach($jeux as $jeu) {
-    print($jeu->name . "\n");
+foreach ($jeux as $jeu) {
+    print_r($jeu->name . "\n");
 }
 print_r("\n");
 
 // Q6
 print_r("Q6 :\n");
-$jeux = Jeu::where('name', 'like', 'Mario%')->whereHas('ratings', function($q) {
+$jeux = Jeu::where('name', 'like', 'Mario%')->whereHas('ratings', function ($q) {
     $q->where('name', 'like', '%3+%');
 })->get();
-foreach($jeux as $jeu) {
-    print($jeu->name . "\n");
+foreach ($jeux as $jeu) {
+    print_r($jeu->name . "\n");
 }
 print_r("\n");
 
@@ -109,7 +71,7 @@ $jeux = Jeu::where('name', 'like', 'Mario%')->whereHas('publishers', function ($
     $query->where('name', 'like', '%3+%');
 })->get();
 foreach ($jeux as $jeu) {
-    echo $jeu->name . "\n";
+    print_r($jeu->name . "\n");
 }
 
 //Q8
@@ -122,7 +84,7 @@ $jeux = Jeu::where('name', 'like', 'Mario%')->whereHas('publishers', function ($
     $query->where('name', 'LIKE', 'CERO');
 })->get();
 foreach ($jeux as $jeu) {
-    echo $jeu->name . "\n";
+    print_r($jeu->name . "\n");
 }
 print_r("\n");
 
