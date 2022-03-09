@@ -100,6 +100,19 @@ foreach (Annonce::all() as $annonce) {
 
 ### 3.4 :
 
+```php
+<?php
+
+use name\models\Annonce;
+
+$annonces = [];
+foreach(Annonce::all() as $annonce){
+    if($annonce->photos->where('taille_octet','>','100000')->count() > 0){
+        $annonces[] = $annonce;
+    }
+}
+```
+
 ---
 
 ## Question 4 :
