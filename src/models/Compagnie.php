@@ -14,4 +14,14 @@ class Compagnie extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
+
+    public function jeuxPublies()
+    {
+        return $this->belongsToMany('gamepedia\models\Jeu', 'game_publishers','comp_id', 'game_id');
+    }
+
+    public function jeuxDeveloppes()
+    {
+        return $this->belongsToMany('gamepedia\models\Jeu', 'game_developers','comp_id', 'game_id');
+    }
 }

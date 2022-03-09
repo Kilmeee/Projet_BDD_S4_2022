@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
 
-    protected $table = 'rating_board';
+    protected $table = 'game_rating';
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
@@ -18,6 +18,11 @@ class Rating extends Model
     public function jeux()
     {
         return $this->belongsToMany('gamepedia\models\Jeu', 'game2rating','rating_id', 'game_id');
+    }
+
+    public function ratingBoard()
+    {
+        return $this->belongsTo('gamepedia\models\RatingBoard', 'rating_board_id');
     }
 
 }
