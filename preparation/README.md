@@ -106,12 +106,12 @@ foreach (Annonce::all() as $annonce) {
 
 ---
 ```php
-
-$photo = new \models\Photo();
-$photo->file = "";
-$photo->date = "";
-$photo->taille_octet = "";
-$annonce = Annonce::where('id','=','22')->get();
+use name\models\{Annonce, Photo, Categorie};
+$photo = new Photo();
+$photo->file = "Photo";
+$photo->date = "02/10/2022";
+$photo->taille_octet = "0";
+$annonce = Annonce::find('22');
 $annonce->photos()->save($photo);
 
 
@@ -121,9 +121,10 @@ $annonce->photos()->save($photo);
 
 ## Question 5 :
 ```php
-$annonce = Annonce::where('id','=','22')->get();
-$categ42 = Categorie::where('id','=','42')->get();
-$categ73 = Categorie::where('id','=','73')->get();
+use name\models\{Annonce, Photo, Categorie};
+$annonce = Annonce::find('22');
+$categ42 = Categorie::find('42');
+$categ73 = Categorie::find('73');
 $categ42->annonces()->save($annonce);
 $categ73->annonces()->save($annonce);
 ```
