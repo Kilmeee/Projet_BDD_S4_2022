@@ -6,6 +6,34 @@ use gamepedia\models\{Compagnie, Genre, Jeu, Plateforme, Rating};
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 Eloquent::start(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'conf.ini');
 
+// Q1
+print("Question 1 : \n\n");
+$charactersGame = Jeu::find('12342')->characters()->get();
+foreach ($charactersGame as $character){
+    print($character->name . ', ' . $character->deck . "\n");
+}
+print("\n");
+
+
+// Q2
+print("Question 2 : \n\n");
+$marioGames = Jeu::where('name','like','Mario%')->get();
+foreach ($marioGames as $mc){
+    foreach ($mc->characters as $character){
+        print($character->name . "\n");
+    }
+}
+print("\n");
+
+
+
+
+
+
+
+
+
+
 
 // Q3
 $jeuxSony = Jeu::whereHas('compagnies', function ($query) {
