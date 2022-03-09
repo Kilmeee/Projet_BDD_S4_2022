@@ -78,7 +78,23 @@ class Photo extends Model
 
 ### 3.1 :
 
+```php
+<?php
+
+use name\models\{Annonce, Photo};
+
+$photos = Annonce::find(22)->photos;
+```
+
 ### 3.2 :
+
+```php
+<?php
+
+use name\models\{Annonce, Photo};
+
+$photos = Annonce::find(22)->photos()->where('taille_octet', '>', 100000)->get();
+```
 
 ### 3.3 :
 
@@ -86,9 +102,6 @@ class Photo extends Model
 <?php
 
 use name\models\{Annonce, Photo, Categorie};
-
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-Eloquent::start(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'conf.ini');
 
 $annonces = [];
 foreach (Annonce::all() as $annonce) {
@@ -118,25 +131,30 @@ foreach(Annonce::all() as $annonce){
 ## Question 4 :
 
 ---
+
 ```php
+<?php
 
-$photo = new \models\Photo();
-$photo->file = "";
-$photo->date = "";
-$photo->taille_octet = "";
-$annonce = Annonce::where('id','=','22')->get();
+use name\models\{Annonce, Photo, Categorie};
+
+$photo = new Photo();
+$photo->file = "Photo";
+$photo->date = "02/10/2022";
+$photo->taille_octet = "0";
+$annonce = Annonce::find('22');
 $annonce->photos()->save($photo);
-
-
-
-
 ```
 
 ## Question 5 :
+
 ```php
-$annonce = Annonce::where('id','=','22')->get();
-$categ42 = Categorie::where('id','=','42')->get();
-$categ73 = Categorie::where('id','=','73')->get();
+<?php
+
+use name\models\{Annonce, Photo, Categorie};
+
+$annonce = Annonce::find('22');
+$categ42 = Categorie::find('42');
+$categ73 = Categorie::find('73');
 $categ42->annonces()->save($annonce);
 $categ73->annonces()->save($annonce);
 ```
