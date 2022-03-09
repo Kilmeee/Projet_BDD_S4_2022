@@ -19,4 +19,8 @@ class Jeu extends Model
         return $this->hasMany('models/Personnage','character_id');
     }
 
+    public function compagnies() {
+        return $this->belongsToMany('gamepedia\models\Compagnie', 'game_publishers','comp_id', 'game_id');
+    }
+
 }
