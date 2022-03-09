@@ -17,7 +17,7 @@ class Personnage extends Model
     public $timestamps = false;
 
    public function characterGames() {
-       return $this->belongsTo(Jeu::class);
+       return $this->belongsTo('models/Jeu','game_id');
    }
 
 }

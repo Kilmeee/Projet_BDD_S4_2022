@@ -16,7 +16,7 @@ class Jeu extends Model
     public $timestamps = false;
 
     public function characters() {
-        return $this->hasMany(Personnage::class);
+        return $this->hasMany('models/Personnage','character_id');
     }
 
 }
