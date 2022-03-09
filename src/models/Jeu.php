@@ -27,4 +27,8 @@ class Jeu extends Model
         return $this->belongsToMany('gamepedia\models\Compagnie', 'game_publishers','comp_id', 'game_id');
     }
 
+    public function genres() {
+        return $this->belongsToMany('gamepedia\models\Genre', 'game2genre','game_id', 'genre_id');
+    }
+
 }
