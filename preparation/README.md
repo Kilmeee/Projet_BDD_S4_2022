@@ -18,7 +18,7 @@ echo $time/1e+6;
 
 ### Question 2 :
 
-//TODO
+L'index a pour intérêt d'accélérer l'exécution d'une requête SQL qui lit des données et ainsi améliorer les performances d’une application utilisant une base de données. Celui-ci est principalement utilisé lorsqu'une colonne est trop grosse afin de pouvoir séparer en petits morceaux la colonne. Ceci dans le but de pouvoir rechercher sur des parties plus restreintes, plutôt que de rechercher directement sur l’entièreté de la colonne.
 
 ---
 
