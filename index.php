@@ -15,7 +15,7 @@ print_r("Q1 : \n");
 $start1 = hrtime(true);
 $q1 = Jeu::all();
 $end1 = hrtime(true);
-$time1 = number_format((($end1 - $start1)/1e+6), 2, '.', ' ');
+$time1 = number_format((($end1 - $start1) / 1e+6), 2, '.', ' ');
 print_r("Temps execution : " . $time1 . "\n");
 
 //Q2
@@ -23,7 +23,7 @@ print_r("Q2 : \n");
 $start2 = hrtime(true);
 $marioGames = Jeu::where('name', 'like', '%Mario%')->get();
 $end2 = hrtime(true);
-$time2 = number_format((($end2 - $start2)/1e+6), 2, '.', ' ');
+$time2 = number_format((($end2 - $start2) / 1e+6), 2, '.', ' ');
 print_r("Temps execution : " . $time2 . "\n");
 
 //Q3
@@ -34,7 +34,7 @@ foreach ($marioGames as $mc) {
     $tmp = $mc->characters;
 }
 $end3 = hrtime(true);
-$time3 = number_format((($end3 - $start3)/1e+6), 2, '.', ' ');
+$time3 = number_format((($end3 - $start3) / 1e+6), 2, '.', ' ');
 print_r("Temps execution : " . $time3 . "\n");
 
 //Q4
@@ -44,34 +44,34 @@ $jeux = Jeu::where('name', 'like', 'Mario%')->whereHas('ratings', function ($q) 
     $q->where('name', 'like', '%3+%');
 })->get();
 $end4 = hrtime(true);
-$time4 = number_format((($end4 - $start4)/1e+6), 2, '.', ' ');
+$time4 = number_format((($end4 - $start4) / 1e+6), 2, '.', ' ');
 print_r("Temps execution : " . $time4 . "\n");
 
 // Q5, Q6, Q7
 print_r("Q5, Q6, Q7 :\n");
-$start1=hrtime(true);
+$start1 = hrtime(true);
 $games1 = Jeu::where('name', 'like', 'Spyro%')->get();
 foreach ($games1 as $g1) {
     print_r($g1->name . "\n");
 }
-$end1=hrtime(true);
-$time1=number_format(($end1-$start1)/1e+6, 1, '.', '');
+$end1 = hrtime(true);
+$time1 = number_format(($end1 - $start1) / 1e+6, 1, '.', '');
 
-$start2=hrtime(true);
+$start2 = hrtime(true);
 $games2 = Jeu::where('name', 'like', 'Crash Bandicoot%')->get();
 foreach ($games2 as $g2) {
     print_r($g2->name . "\n");
 }
-$end2=hrtime(true);
-$time2=number_format(($end2-$start2)/1e+6, 1, '.', '');
+$end2 = hrtime(true);
+$time2 = number_format(($end2 - $start2) / 1e+6, 1, '.', '');
 
-$start3=hrtime(true);
+$start3 = hrtime(true);
 $games3 = Jeu::where('name', 'like', 'Warcraft%')->get();
 foreach ($games3 as $g3) {
     print_r($g3->name . "\n");
 }
-$end3=hrtime(true);
-$time3=number_format(($end3-$start3)/1e+6, 1, '.', '');
+$end3 = hrtime(true);
+$time3 = number_format(($end3 - $start3) / 1e+6, 1, '.', '');
 
 print_r("Avec index\n\nTemps d'exécution Tomb Raider : $time1 ms\nTemps d'exécution Crash Bandicoot : $time2 ms\nTemps d'exécution Warcraft : $time3 ms\n\n");
 
@@ -94,7 +94,7 @@ foreach ($charMario as $game) {
     $tmp = $game->characters;
 }
 
-//Q5*/
+//Q5
 $sonyCompagnies = Compagnie::where('name', 'LIKE', "%Sony%")->get();
 foreach ($sonyCompagnies as $compagny) {
     $tmp = $compagny->jeuxDeveloppes;
