@@ -17,8 +17,11 @@ class Personnage extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-   public function characterGames() {
-       return $this->belongsTo('gamepedia\models\Jeu','game_id');
+   public function games() {
+       return $this->belongsToMany('gamepedia\models\Jeu', 'game2character', 'character_id', 'game_id');   }
+
+   public function firstGame() {
+       return $this->belongsTo('gamepedia\models\Jeu','first_appeared_in_game_id');
    }
 
 }
