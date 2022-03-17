@@ -26,7 +26,22 @@ L'index a pour intérêt d'accélérer l'exécution d'une requête SQL qui lit d
 
 ### Question 1 :
 
-//TODO
+Stucture du query log :
+
+```php
+<?php
+Jeu::find('12342');
+```
+La requête suivante est décrite par :
+
+```php
+--------------
+query : select * from `game` where `game`.`id` = ? limit 1
+ --- bindings : [  12342, ] ---
+--------------
+```
+On voit ici la requête SQL qui est exécutée, avec les paramètres qui lui sont associés.
+Ici, on selectionne toutes les données de la table game pour l'id 12342 (passé dans **bindings**) et on prends une limite de 1 (facultatif car clé primaire).
 
 ### Question 2 :
 
