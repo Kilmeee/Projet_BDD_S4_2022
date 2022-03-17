@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @method static where(string $string, string $string1, string $string2)
+ * @method static find(int $int)
  */
 class Jeu extends Model
 {
