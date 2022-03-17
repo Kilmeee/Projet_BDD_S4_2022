@@ -72,6 +72,7 @@ foreach ($games3 as $g3) {
 }
 $end3=hrtime(true);
 $time3=number_format(($end3-$start3)/1e+6, 1, '.', '');
+
 print_r("Avec index\n\nTemps d'exécution Tomb Raider : $time1 ms\nTemps d'exécution Crash Bandicoot : $time2 ms\nTemps d'exécution Warcraft : $time3 ms\n\n");
 
 /*-----------Partie 2-----------*/
