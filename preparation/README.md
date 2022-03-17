@@ -1,77 +1,43 @@
 # Projet_BDD_S4_2022
 
-# Préparation à la séance 03
+# Préparation à la séance 04
 
 ---
 
-# Partie 1 :
+# Question 1 :
 
-### Question 1 :
+Faker s'installe en utilisant la commande suivante :
 
 ```php
-<?php
-$start=hrtime(true);
-$end=hrtime(true);
-$time=$end-$start;
-echo $time/1e+6;
+composer require fakerphp/faker
 ```
 
-### Question 2 :
-
-L'index a pour intérêt d'accélérer l'exécution d'une requête SQL qui lit des données et ainsi améliorer les performances d’une application utilisant une base de données. Celui-ci est principalement utilisé lorsqu'une colonne est trop grosse afin de pouvoir séparer en petits morceaux la colonne. Ceci dans le but de pouvoir rechercher sur des parties plus restreintes, plutôt que de rechercher directement sur l’entièreté de la colonne.
-
----
-
-# Partie 2 :
-
-### Question 1 :
-
-Stucture du query log :
+Puis dans le code :
 
 ```php
-<?php
-Jeu::find('12342');
+use Faker\Factory;
+$faker = Factory::create();
 ```
-La requête suivante est décrite par :
+
+# Question 2 :
+
+La création de cette variable permet d'initialiser le générateur.
+
+Pour générer une adresse américaine :
 
 ```php
---------------
-query : select * from `game` where `game`.`id` = ? limit 1
- --- bindings : [  12342, ] ---
---------------
+use Faker\Factory as Faker;
+$faker = Faker::create('en_US');
+echo $faker->address();
+// Outputs: "19412 Estell Prairie, Steuberland, MT 65322-1356"
 ```
-On voit ici la requête SQL qui est exécutée, avec les paramètres qui lui sont associés.
-Ici, on selectionne toutes les données de la table game pour l'id 12342 (passé dans **bindings**) et on prends une limite de 1 (facultatif car clé primaire).
 
-### Question 2 :
+# Question 3 :
 
-Le problème des **N+1 Query** est que lorsque on veut par exemple afficher un attribut d'une classe B correspondant à une relation d'une classe A, il faut faire une requête pour tous les elements de la classe A.
-
-Exemple :
+Pour formatter un objet DateTime en chaine de caractère, on utilise :
 
 ```php
-<?php
-
-use name\models\{A, B}
-
-foreach (A::all() as $a) {
-    print_r($a->b->attribut);
-}
-```
-Si on a par exemple 13 lignes dans la table A, on devra faire 14 requêtes pour cette execution.
-
-Je vous laisse imaginer si la table A contenait 300000 lignes.
-
-Pour cela une solution (avec Eloquent) : On récupère d'abord tous les élements de la classe A possédant l'attribut B
-
-```php
-<?php
-
-use name\models\{A, B}
-
-$as = A::with('b')->get();
-
-foreach ($as as $a) {
-    print_r($a->b->attribut);
-}
+$date = new DateTime('2017-02-16 16:15:00');
+echo $date->format('Y/m/d (H:i)');
+// Output : 2017/02/16 (16:15)
 ```
