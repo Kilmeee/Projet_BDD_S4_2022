@@ -11,7 +11,7 @@ ini_set('memory_limit', '-1');
 /*-----------Partie 1-----------*/
 
 //Q1
-/*print_r("Q1 : \n");
+print_r("Q1 : \n");
 $start1 = hrtime(true);
 $q1 = Jeu::all();
 $end1 = hrtime(true);
@@ -45,77 +45,34 @@ $jeux = Jeu::where('name', 'like', 'Mario%')->whereHas('ratings', function ($q) 
 })->get();
 $end4 = hrtime(true);
 $time4 = number_format((($end4 - $start4)/1e+6), 2, '.', ' ');
-print_r("Temps execution : " . $time4 . "\n");*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print_r("Temps execution : " . $time4 . "\n");
+
+// Q5, Q6, Q7
+print_r("Q5, Q6, Q7 :\n");
+$start1=hrtime(true);
+$games1 = Jeu::where('name', 'like', 'Spyro%')->get();
+foreach ($games1 as $g1) {
+    print_r($g1->name . "\n");
+}
+$end1=hrtime(true);
+$time1=number_format(($end1-$start1)/1e+6, 1, '.', '');
+
+$start2=hrtime(true);
+$games2 = Jeu::where('name', 'like', 'Crash Bandicoot%')->get();
+foreach ($games2 as $g2) {
+    print_r($g2->name . "\n");
+}
+$end2=hrtime(true);
+$time2=number_format(($end2-$start2)/1e+6, 1, '.', '');
+
+$start3=hrtime(true);
+$games3 = Jeu::where('name', 'like', 'Warcraft%')->get();
+foreach ($games3 as $g3) {
+    print_r($g3->name . "\n");
+}
+$end3=hrtime(true);
+$time3=number_format(($end3-$start3)/1e+6, 1, '.', '');
+print_r("Avec index\n\nTemps d'exécution Tomb Raider : $time1 ms\nTemps d'exécution Crash Bandicoot : $time2 ms\nTemps d'exécution Warcraft : $time3 ms\n\n");
 
 /*-----------Partie 2-----------*/
 
