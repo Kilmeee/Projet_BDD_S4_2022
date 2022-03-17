@@ -94,10 +94,22 @@ foreach ($charMario as $game) {
     $tmp = $game->characters;
 }
 
-//Q5
-$sonyGames = Compagnie::where('name', 'LIKE', "%Sony%")->get();
-foreach ($sonyGames as $game) {
-    $tmp = $game->games;
+//Q5*/
+$sonyCompagnies = Compagnie::where('name', 'LIKE', "%Sony%")->get();
+foreach ($sonyCompagnies as $compagny) {
+    $tmp = $compagny->jeuxDeveloppes;
+}
+
+//Chargements liés
+
+$charMario = Jeu::where('name', 'LIKE', "%Mario%")->with('characters')->get();
+foreach ($charMario as $game) {
+    $tmp = $game->characters;
+}
+
+$sonyCompagnies = Compagnie::where('name', 'LIKE', "%Sony%")->with('jeuxDeveloppes')->get();
+foreach ($sonyCompagnies as $compagny) {
+    $tmp = $compagny->jeuxDeveloppes;
 }
 
 //Affichage
@@ -111,7 +123,7 @@ displayQueryLog();
 function displayQueryLog(): void
 {
     foreach (Eloquent::getQueryLog() as $querylogItem) {
-        print_r("\n Requête SQL : " . $querylogItem['query'] . "\n");
+        print_r("\t Requête SQL : " . $querylogItem['query'] . "\n");
         print_r("\t Paramètres : " . json_encode($querylogItem['bindings']) . "\n");
         print_r("\t Durée : " . $querylogItem['time'] . " ms\n");
     }
