@@ -30,3 +30,9 @@ for ($i = 1; $i <= 25000; $i++) {
         $commentaire->save();
     }
 }
+
+$com = Utilisateur::find('Louis.Michèle8@gmail.com')->commentaires()->get()->sortByDesc('created_at');
+foreach($com as $c){
+    echo $c->contenu."\n";
+    echo $c->created_at."\n";
+}
