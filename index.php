@@ -9,7 +9,6 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 Eloquent::start(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'conf.ini');
 
 // PARTIE 1
-
 $u1 = new Utilisateur();
 $u2 = new Utilisateur();
 
@@ -51,7 +50,7 @@ $com2->date_creation = date_create_from_format('Y-m-d',"2022-03-18");
 $com2->email_utilisateur = "keanuharrell@hotmail.fr";
 $com2->id_game = 12342;
 
-/********** COMMENTAIRES USER 2 ***************/
+// COMMENTAIRES USER 2
 
 $com3 = new Commentaire();
 $com3->titre = "pol en ski";
@@ -111,4 +110,11 @@ $com = Utilisateur::find('Louis.Michèle8@gmail.com')->commentaires()->get()->so
 foreach($com as $c){
     echo $c->contenu."\n";
     echo $c->created_at."\n";
+}
+
+
+$users = Utilisateur::has('commentaires','>','5')->get();
+foreach($users as $u){
+    echo $u->email."\n";
+    echo $u->commentaires()->count()."\n";
 }
