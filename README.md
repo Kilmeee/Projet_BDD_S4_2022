@@ -15,4 +15,4 @@ Groupe SI2
 - [Séance 02](https://github.com/Kilmeee/Projet_BDD_S4_2022/tree/s02)
 - [Séance 03](https://github.com/Kilmeee/Projet_BDD_S4_2022/tree/s03)
 - [Séance 04](https://github.com/Kilmeee/Projet_BDD_S4_2022/tree/s04)
-- [Séance 05](https://github.com/Kilmeee/Projet_BDD_S4_2022/tree/s05)
+- [Séances 05 et 06](https://github.com/Kilmeee/Projet_BDD_S4_2022/tree/s05-s06)
