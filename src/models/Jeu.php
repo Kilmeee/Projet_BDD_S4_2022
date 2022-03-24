@@ -15,7 +15,7 @@ class Jeu extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    public function hasMany() : \Illuminate\Database\Eloquent\Relations\HasMany{
+    public function commentaires() : \Illuminate\Database\Eloquent\Relations\HasMany{
         return $this->hasMany('gamepedia\models\Commentaire', 'id_game');
     }
 }
