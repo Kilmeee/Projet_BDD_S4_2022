@@ -1,3 +1,5 @@
-.idea
-vendor
+/vendor/
+conf.ini
+.idea/
+.vscode/
 composer.lock
