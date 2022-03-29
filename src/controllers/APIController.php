@@ -76,9 +76,10 @@ class APIController
                 if ($titre && $contenu && filter_var($this->request->getParsedBodyParam('email'), FILTER_VALIDATE_EMAIL)) {
                     try {
                         $email = filter_var($this->request->getParsedBodyParam('email'), FILTER_SANITIZE_EMAIL);
-                        Jeu::find($id)->commentaires()->create(['titre' => $titre, 'contenu' => $contenu, 'email_utilisateur' => $email, 'date_creation' => date('Y-m-d H:i:s')]);
-                        return $this->response->withRedirect($this->container['router']->pathFor('gameComments', ['id' => $id]));
-                    } catch (Exception) {
+                        $commentaire = Jeu::find($id)->commentaires()->create(['titre' => $titre, 'contenu' => $contenu, 'email_utilisateur' => $email, 'date_creation' => date('Y-m-d H:i:s')]);
+                        return $this->response->withStatus(201, "Created")->withHeader('Location', $this->container['router']->pathFor('comments', ['id' => $commentaire->id]))->withJson($commentaire);
+                    } catch (Exception $e) {
+                        print_r($e->getMessage());
                         return $this->response->withStatus(400, "Bad request");
                     }
                 } else {
@@ -89,10 +90,10 @@ class APIController
         }
     }
 
-    public function getGameCharacters() : Response
+    public function getGameCharacters(): Response
     {
         $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
-        if($id) {
+        if ($id) {
             $data = array('characters' => Jeu::find($id)->personnages()->get(['id', 'name'])->transform(function ($value) {
                 return array(
                     "character" => array('id' => $value->id, 'name' => $value->name),
@@ -103,10 +104,10 @@ class APIController
         return $this->response->withJson($data);
     }
 
-    public function characters() : Response
+    public function characters(): Response
     {
         $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
-        if($id) {
+        if ($id) {
             return $this->response->withJson(Personnage::find($id));
         }
     }
