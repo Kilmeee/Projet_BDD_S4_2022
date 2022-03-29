@@ -4,7 +4,8 @@
   "require": {
     "illuminate/database": "^v8.83.2",
     "php": "^8.0.0",
-    "fakerphp/faker": "^1.19"
+    "fakerphp/faker": "^1.19",
+    "slim/slim": "^3.12.3"
   },
   "autoload": {
     "psr-4": {
