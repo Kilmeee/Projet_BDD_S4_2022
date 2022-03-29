@@ -13,7 +13,9 @@ $container['settings']['displayErrorDetails'] = true;
 $app = new App($container);
 
 #Redirection du traffic dans l'application
-//TODO
+$app->group('/api', function ($app) {
+    //TODO
+});
 
 #Demmarage de l'application
 try {
