@@ -34,6 +34,10 @@ $app->group('/api', function ($app) {
     $app->get("/characters/{id:[0-9]+}[/]", function ($request, $response, $args) {
         return (new APIController($this, $request, $response, $args))->characters();
     })->setName('characters');
+
+    $app->get("/comments/{id:[0-9]+}[/]", function ($request, $response, $args) {
+        return (new APIController($this, $request, $response, $args))->comment();
+    })->setName('comment');
 });
 
 #Demmarage de l'application

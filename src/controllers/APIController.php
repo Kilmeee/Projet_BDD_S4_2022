@@ -2,9 +2,9 @@
 
 namespace gamepedia\controllers;
 
-use gamepedia\models\{Jeu, Personnage};
-use Slim\Http\{Request, Response};
+use gamepedia\models\{Commentaire, Jeu, Personnage};
 use Slim\Container;
+use Slim\Http\{Request, Response};
 use Exception;
 
 class APIController
@@ -107,8 +107,22 @@ class APIController
     public function characters(): Response
     {
         $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
-        if ($id) {
-            return $this->response->withJson(Personnage::find($id));
+        $char = Personnage::find($id);
+        if($char) {
+            return $this->response->withJson($char);
+        } else {
+            return $this->response->withStatus(404)->write("Character $id not found");
+        }
+    }
+
+    public function comment() : Response
+    {
+        $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
+        $comment = Commentaire::find($id);
+        if($comment) {
+            return $this->response->withJson($comment);
+        } else {
+            return $this->response->withStatus(404)->write("Comment $id not found");
         }
     }
 }
