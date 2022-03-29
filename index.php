@@ -2,6 +2,7 @@
 
 use gamepedia\db\Eloquent;
 use Slim\{App, Container};
+use Slim\Http\{Request, Response};
 use gamepedia\controllers\APIController;
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -15,25 +16,30 @@ $app = new App($container);
 
 #Redirection du traffic dans l'application
 $app->group('/api', function ($app) {
-    $app->get("/games/{id:[0-9]+}/characters[/]", function ($request, $response, $args) {
-        return (new APIController($this, $request, $response, $args))->getGameCharacters();
-    })->setName('gameCharacters');
+    $app->group('/games', function ($app) {
+        $app->get("/{id:[0-9]+}/characters[/]", function (Request $request, Response $response, array $args) {
+            return (new APIController($this))->getGameCharacters($request, $response, $args);
+        })->setName('gameCharacters');
 
-    $app->any("/games/{id:[0-9]+}/comments[/]", function ($request, $response, $args) {
-        return (new APIController($this, $request, $response, $args))->comments();
-    })->setName('gameComments');
+        $app->any("/{id:[0-9]+}/comments[/]", function (Request $request, Response $response, array $args) {
+            return (new APIController($this))->comments($request, $response, $args);
+        })->setName('gameComments');
 
-    $app->get("/games/{id:[0-9]+}[/]", function ($request, $response, $args) {
-        return (new APIController($this, $request, $response, $args))->getGame();
-    })->setName('game');
+        $app->get("/{id:[0-9]+}[/]", function (Request $request, Response $response, array $args) {
+            return (new APIController($this))->getGame($request, $response, $args);
+        })->setName('game');
 
-    $app->get("/games[/]", function ($request, $response, $args) {
-        return (new APIController($this, $request, $response, $args))->getAllGames();
-    })->setName('games');
-
-    $app->get("/characters/{id:[0-9]+}[/]", function ($request, $response, $args) {
-        return (new APIController($this, $request, $response, $args))->characters();
+        $app->get("[/]", function (Request $request, Response $response, array $args) {
+            return (new APIController($this))->getAllGames($request, $response, $args);
+        })->setName('games');
+    });
+    $app->get("/characters/{id:[0-9]+}[/]", function (Request $request, Response $response, array $args) {
+        return (new APIController($this))->characters($request, $response, $args);
     })->setName('characters');
+
+    $app->get("/comments/{id:[0-9]+}[/]", function (Request $request, Response $response, array $args) {
+        return (new APIController($this))->comment($request, $response, $args);
+    })->setName('comment');
 });
 
 #Demmarage de l'application
