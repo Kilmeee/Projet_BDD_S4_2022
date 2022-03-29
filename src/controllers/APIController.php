@@ -22,11 +22,11 @@ class APIController
         $this->args = $args;
     }
 
-    public function getGame() : Response
+    public function getGame(): Response
     {
         $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
         $game = Jeu::find($id, ["id", "name", "alias", "deck", "description", "original_release_date"]);
-        if($game) {
+        if ($game) {
             return $this->response->withJson($game);
         } else {
             return $this->response->withStatus(404, "Not found")->write("Game $id not found");
@@ -36,8 +36,12 @@ class APIController
     public function getAllGames(): Response
     {
         $id = filter_var($this->request->getQueryParam('page'), FILTER_SANITIZE_NUMBER_INT);
-        if($id) {
-            $data = array('games' => Jeu::simplePaginate(200, ["id", "name", "alias", "deck"], "page", $id));
+        if ($id) {
+            $paginator = Jeu::simplePaginate(200, ["id", "name", "alias", "deck"], "page", $id);
+            $data = [];
+            $data['links']['prev']['href'] = $this->request->getUri()->getPath() . $paginator->previousPageUrl();
+            $data['links']['next']['href'] = $this->request->getUri()->getPath() . $paginator->nextPageUrl();
+            $data['games'] = $paginator->items();
         } else {
             $data = array('games' => Jeu::select(["id", "name", "alias", "deck"])->limit(200)->get());
         }
