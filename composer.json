@@ -3,6 +3,7 @@
   "description": "Projet BDD SQL 2022",
   "require": {
     "illuminate/database": "^v8.83.2",
+    "illuminate/pagination": "^v9.5.1",
     "php": "^8.0.0",
     "fakerphp/faker": "^1.19",
     "slim/slim": "^3.12.3"
