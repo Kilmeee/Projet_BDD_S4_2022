@@ -27,7 +27,10 @@ class APIController
         $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
         $game = Jeu::find($id, ["id", "name", "alias", "deck", "description", "original_release_date"]);
         if ($game) {
-            return $this->response->withJson($game);
+            return $this->response->withJson(array("links" => array(
+                "comments" => $this->container['router']->pathFor('gameComments', ['id' => $id]),
+                "characters" => $this->container['router']->pathFor('gameCharacters', ['id' => $id]),
+            ), "game" => $game));
         } else {
             return $this->response->withStatus(404, "Not found")->write("Game $id not found");
         }
