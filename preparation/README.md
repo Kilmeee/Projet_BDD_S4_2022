@@ -34,3 +34,14 @@ Avec Slim, il est possible de récuperer les paramètres d'une requête HTTP ave
 - `getParam($param)` -> Valeur d'un paramètre de la requête HTTP, peu importe sa provenance.
 
 ---
+
+## Q3
+
+Pour positionner un header dans la réponse, on utilise la méthode `$response->withHeader($name, $value)`.
+
+Exemple :
+
+```php
+$newResponse = $oldResponse->withHeader('Content-type', 'application/json');
+```
+---
