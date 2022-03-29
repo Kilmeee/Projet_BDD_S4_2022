@@ -3,6 +3,7 @@
 namespace gamepedia\controllers;
 
 use gamepedia\models\Jeu;
+use gamepedia\models\Personnage;
 use Slim\Container;
 use Slim\Http\{Request, Response};
 
@@ -61,13 +62,35 @@ class APIController
         return $this->response->withJson($data);
     }
 
-    public function getComments(): Response
+    public function comments(): Response
     {
         $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
         if($id) {
             return $this->response->withJson(array('commentaire' => Jeu::find($id)->commentaires()->get(['id', 'titre', 'contenu', 'date_creation', 'email_utilisateur'])));
         } else {
             return $this->response->withStatus(404, "Game $id not found");
+        }
+    }
+
+    public function getGameCharacters() : Response
+    {
+        $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
+        if($id) {
+            $data = array('characters' => Jeu::find($id)->personnages()->get(['id', 'name'])->transform(function ($value) {
+                return array(
+                    "character" => array('id' => $value->id, 'name' => $value->name),
+                    "links" => array('self' => array('href' => $this->container['router']->pathFor('characters', ['id' => $value->id])))
+                );
+            }));
+        }
+        return $this->response->withJson($data);
+    }
+
+    public function characters() : Response
+    {
+        $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
+        if($id) {
+            return $this->response->withJson(Personnage::find($id));
         }
     }
 }

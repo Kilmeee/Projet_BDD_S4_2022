@@ -3,7 +3,7 @@
 namespace gamepedia\models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{HasMany, BelongsToMany};
 
 /**
  * @method static where(string $string, string $string1, string $string2)
@@ -23,5 +23,10 @@ class Jeu extends Model
     public function commentaires() : HasMany
     {
         return $this->hasMany('gamepedia\models\Commentaire', 'id_game');
+    }
+
+    public function personnages(): BelongsToMany
+    {
+        return $this->belongsToMany('gamepedia\models\Personnage', 'game2character', 'game_id', 'character_id');
     }
 }

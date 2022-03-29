@@ -15,6 +15,14 @@ $app = new App($container);
 
 #Redirection du traffic dans l'application
 $app->group('/api', function ($app) {
+    $app->get("/games/{id:[0-9]+}/characters[/]", function ($request, $response, $args) {
+        return (new APIController($this, $request, $response, $args))->getGameCharacters();
+    })->setName('gameCharacters');
+
+    $app->get("/games/{id:[0-9]+}/comments[/]", function ($request, $response, $args) {
+        return (new APIController($this, $request, $response, $args))->comments();
+    })->setName('comments');
+
     $app->get("/games/{id:[0-9]+}[/]", function ($request, $response, $args) {
         return (new APIController($this, $request, $response, $args))->getGame();
     })->setName('game');
@@ -23,9 +31,9 @@ $app->group('/api', function ($app) {
         return (new APIController($this, $request, $response, $args))->getAllGames();
     })->setName('games');
 
-    $app->get("/games/{id:[0-9]+}/comments[/]", function ($request, $response, $args) {
-        return (new APIController($this, $request, $response, $args))->getComments();
-    })->setName('comments');
+    $app->get("/characters/{id:[0-9]+}[/]", function ($request, $response, $args) {
+        return (new APIController($this, $request, $response, $args))->characters();
+    })->setName('characters');
 });
 
 #Demmarage de l'application
