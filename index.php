@@ -22,6 +22,10 @@ $app->group('/api', function ($app) {
     $app->get("/games[/]", function ($request, $response, $args) {
         return (new APIController($this, $request, $response, $args))->getAllGames();
     })->setName('games');
+
+    $app->get("/games/{id:[0-9]+}/comments[/]", function ($request, $response, $args) {
+        return (new APIController($this, $request, $response, $args))->getComments();
+    })->setName('comments');
 });
 
 #Demmarage de l'application

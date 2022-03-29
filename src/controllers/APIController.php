@@ -57,4 +57,14 @@ class APIController
         }
         return $this->response->withJson($data);
     }
+
+    public function getComments(): Response
+    {
+        $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
+        if($id) {
+            return $this->response->withJson(array('commentaire' => Jeu::find($id)->commentaires()->get(['id', 'titre', 'contenu', 'date_creation', 'email_utilisateur'])));
+        } else {
+            return $this->response->withStatus(404, "Game $id not found");
+        }
+    }
 }

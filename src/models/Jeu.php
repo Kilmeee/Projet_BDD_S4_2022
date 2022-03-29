@@ -3,6 +3,7 @@
 namespace gamepedia\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static where(string $string, string $string1, string $string2)
@@ -18,4 +19,9 @@ class Jeu extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
+
+    public function commentaires() : HasMany
+    {
+        return $this->hasMany('gamepedia\models\Commentaire', 'id_game');
+    }
 }
