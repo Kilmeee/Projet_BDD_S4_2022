@@ -37,6 +37,16 @@ Avec Slim, il est possible de récuperer les paramètres d'une requête HTTP ave
 
 ## Q3
 
+Pour positionner un code de réponse, on utilise la méthode `$response->withStatus($code, $message)`.
+
+Exemple :
+
+```php
+$newResponse = $response->withStatus(302);
+$newResponse = $response->withStatus(404, 'Not Found');
+```
+---
+
 Pour positionner un header dans la réponse, on utilise la méthode `$response->withHeader($name, $value)`.
 
 Exemple :
@@ -45,3 +55,4 @@ Exemple :
 $newResponse = $oldResponse->withHeader('Content-type', 'application/json');
 ```
 ---
+
