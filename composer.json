@@ -2,8 +2,8 @@
   "name": "iutnc-pgka/projet_bdd_s4_2022",
   "description": "Projet BDD SQL 2022",
   "require": {
-    "illuminate/database": "^v8.83.2",
-    "illuminate/pagination": "^v9.5.1",
+    "illuminate/database": "^v8.83.5",
+    "illuminate/pagination": "^v8.83.5",
     "php": "^8.0.0",
     "fakerphp/faker": "^1.19",
     "slim/slim": "^3.12.3"
