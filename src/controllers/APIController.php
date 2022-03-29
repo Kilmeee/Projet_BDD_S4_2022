@@ -41,9 +41,19 @@ class APIController
             $data = [];
             $data['links']['prev']['href'] = $this->request->getUri()->getPath() . $paginator->previousPageUrl();
             $data['links']['next']['href'] = $this->request->getUri()->getPath() . $paginator->nextPageUrl();
-            $data['games'] = $paginator->items();
+            $data['games'] = $paginator->getCollection()->transform(function ($value) {
+                return array(
+                    "game" => $value,
+                    "links" => array('self' => array('href' => $this->request->getUri()->getPath() . "/" . $value->id))
+                );
+            });
         } else {
-            $data = array('games' => Jeu::select(["id", "name", "alias", "deck"])->limit(200)->get());
+            $data = array('games' => Jeu::select(["id", "name", "alias", "deck"])->limit(200)->get()->transform(function ($value) {
+                return array(
+                    "game" => $value,
+                    "links" => array('self' => array('href' => $this->request->getUri()->getPath() . "/" . $value->id))
+                );
+            }));
         }
         return $this->response->withJson($data);
     }
