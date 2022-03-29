@@ -35,7 +35,12 @@ class APIController
 
     public function getAllGames(): Response
     {
-        $games = Jeu::select(["id", "name", "alias", "deck"])->limit(200)->get();
-        return $this->response->withJson(array('games' => $games));
+        $id = filter_var($this->request->getQueryParam('page'), FILTER_SANITIZE_NUMBER_INT);
+        if($id) {
+            $data = array('games' => Jeu::simplePaginate(200, ["id", "name", "alias", "deck"], "page", $id));
+        } else {
+            $data = array('games' => Jeu::select(["id", "name", "alias", "deck"])->limit(200)->get());
+        }
+        return $this->response->withJson($data);
     }
 }

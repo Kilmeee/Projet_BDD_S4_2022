@@ -17,11 +17,11 @@ $app = new App($container);
 $app->group('/api', function ($app) {
     $app->get("/games/{id:[0-9]+}[/]", function ($request, $response, $args) {
         return (new APIController($this, $request, $response, $args))->getGame();
-    })->setName('createurs');
+    })->setName('game');
 
     $app->get("/games[/]", function ($request, $response, $args) {
         return (new APIController($this, $request, $response, $args))->getAllGames();
-    })->setName('createurs');
+    })->setName('games');
 });
 
 #Demmarage de l'application
