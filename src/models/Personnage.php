@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @method static find(mixed $id)
+ * @method static find(mixed $id, array $columns = [])
  */
 class Personnage extends Model
 {

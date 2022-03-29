@@ -22,7 +22,13 @@ $app->group('/api', function ($app) {
         })->setName('gameCharacters');
 
         $app->any("/{id:[0-9]+}/comments[/]", function (Request $request, Response $response, array $args) {
-            return (new APIController($this))->comments($request, $response, $args);
+            $c = new APIController($this);
+            if ($request->isPost())
+                return $c->postGameComment($request, $response, $args);
+            else if ($request->isGet())
+                return $c->getGameComment($request, $response, $args);
+            else
+                return $c->methodNotAllowed($request, $response, $args);
         })->setName('gameComments');
 
         $app->get("/{id:[0-9]+}[/]", function (Request $request, Response $response, array $args) {
@@ -38,7 +44,7 @@ $app->group('/api', function ($app) {
     })->setName('characters');
 
     $app->get("/comments/{id:[0-9]+}[/]", function (Request $request, Response $response, array $args) {
-        return (new APIController($this))->comment($request, $response, $args);
+        return (new APIController($this))->comments($request, $response, $args);
     })->setName('comment');
 });
 
