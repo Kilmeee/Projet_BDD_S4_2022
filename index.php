@@ -19,9 +19,9 @@ $app->group('/api', function ($app) {
         return (new APIController($this, $request, $response, $args))->getGameCharacters();
     })->setName('gameCharacters');
 
-    $app->get("/games/{id:[0-9]+}/comments[/]", function ($request, $response, $args) {
+    $app->any("/games/{id:[0-9]+}/comments[/]", function ($request, $response, $args) {
         return (new APIController($this, $request, $response, $args))->comments();
-    })->setName('comments');
+    })->setName('gameComments');
 
     $app->get("/games/{id:[0-9]+}[/]", function ($request, $response, $args) {
         return (new APIController($this, $request, $response, $args))->getGame();

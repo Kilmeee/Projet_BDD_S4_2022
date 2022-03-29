@@ -5,6 +5,9 @@ namespace gamepedia\models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\belongsTo;
 
+/**
+ * @method static create(array $array)
+ */
 class Commentaire extends Model
 {
 
@@ -12,6 +15,7 @@ class Commentaire extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
+    protected $guarded = [];
 
     public function jeu() : belongsTo
     {

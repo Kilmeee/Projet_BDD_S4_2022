@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\{HasMany, BelongsToMany};
 /**
  * @method static where(string $string, string $string1, string $string2)
  * @method static limit(int $int)
- * @method static find(int $id, array $args)
+ * @method static find(int $id, array $args = null)
  * @method static select(string[] $array)
  * @method static simplePaginate(int $int, string[] $array, string $string, mixed $id)
  */

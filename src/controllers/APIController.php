@@ -2,10 +2,10 @@
 
 namespace gamepedia\controllers;
 
-use gamepedia\models\Jeu;
-use gamepedia\models\Personnage;
-use Slim\Container;
+use gamepedia\models\{Jeu, Personnage};
 use Slim\Http\{Request, Response};
+use Slim\Container;
+use Exception;
 
 class APIController
 {
@@ -65,10 +65,27 @@ class APIController
     public function comments(): Response
     {
         $id = filter_var($this->args['id'], FILTER_SANITIZE_NUMBER_INT);
-        if($id) {
-            return $this->response->withJson(array('commentaire' => Jeu::find($id)->commentaires()->get(['id', 'titre', 'contenu', 'date_creation', 'email_utilisateur'])));
-        } else {
-            return $this->response->withStatus(404, "Game $id not found");
+        if (empty($id))
+            return $this->response->withStatus(404, "Not found")->write("Game $id not found");
+        switch ($this->request->getMethod()) {
+            case 'GET':
+                return $this->response->withJson(array('commentaire' => Jeu::find($id)->commentaires()->get(['id', 'titre', 'contenu', 'date_creation', 'email_utilisateur'])));
+            case 'POST':
+                $titre = filter_var($this->request->getParsedBodyParam('titre'), FILTER_SANITIZE_STRING);
+                $contenu = filter_var($this->request->getParsedBodyParam('contenu'), FILTER_SANITIZE_STRING);
+                if ($titre && $contenu && filter_var($this->request->getParsedBodyParam('email'), FILTER_VALIDATE_EMAIL)) {
+                    try {
+                        $email = filter_var($this->request->getParsedBodyParam('email'), FILTER_SANITIZE_EMAIL);
+                        Jeu::find($id)->commentaires()->create(['titre' => $titre, 'contenu' => $contenu, 'email_utilisateur' => $email, 'date_creation' => date('Y-m-d H:i:s')]);
+                        return $this->response->withRedirect($this->container['router']->pathFor('gameComments', ['id' => $id]));
+                    } catch (Exception) {
+                        return $this->response->withStatus(400, "Bad request");
+                    }
+                } else {
+                    return $this->response->withStatus(400, "Bad request");
+                }
+            default:
+                return $this->response->withStatus(405, "Method not allowed");
         }
     }
 
