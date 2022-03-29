@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\belongsTo;
 
 /**
  * @method static create(array $array)
- * @method static find(mixed $id)
+ * @method static find(int $id, array $columns = [])
  */
 class Commentaire extends Model
 {
